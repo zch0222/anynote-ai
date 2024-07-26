@@ -127,6 +127,7 @@ class RagService:
             node_parser = self.get_node_parser()
             documents = self.load_documents([file_download_dto.file_path])
             nodes = node_parser.get_nodes_from_documents(documents)
+            # 设置EMBEDDING_MODEL ServiceContext
             vector_index = VectorStoreIndex(nodes)
             vector_index.storage_context.persist(persist_dir=vector_index_path)
         return vector_index_path
