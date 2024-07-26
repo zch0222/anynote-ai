@@ -49,19 +49,19 @@ async def business_exception_handler(request: Request, exc: BusinessException):
         content=ResData.error(exc.message)
     )
 
-@app.middleware("http")
-async def http_middleware(request: Request, call_next):
-    response = Response("Internal server error", status_code=500)
-    try:
-        x_token = request.headers["X-Token"]
-        if x_token not in fake_tokens_db:
-            raise HTTPException(status_code=401, detail="Invalid token")
-    except KeyError:
-        raise HTTPException(status_code=401, detail="Missing token")
-
-    # 继续处理请求
-    response = await call_next(request)
-    return response
+# @app.middleware("http")
+# async def http_middleware(request: Request, call_next):
+#     response = Response("Internal server error", status_code=500)
+#     try:
+#         x_token = request.headers["X-Token"]
+#         if x_token not in fake_tokens_db:
+#             raise HTTPException(status_code=401, detail="Invalid token")
+#     except KeyError:
+#         raise HTTPException(status_code=401, detail="Missing token")
+#
+#     # 继续处理请求
+#     response = await call_next(request)
+#     return response
 
 # 全局异常处理
 @app.exception_handler(Exception)
