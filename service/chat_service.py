@@ -135,5 +135,7 @@ class ChatService:
             yield from self.gpt4_turbo_preview_search(chat_dto)
         elif CHAT_MODELS["GPT_4_TURBO_PREVIEW"] == chat_dto.model:
             yield from self.gpt4_turbo_preview(chat_dto)
+        elif CHAT_MODELS["GPT_4_TURBO_PREVIEW_WEB_SEARCH_V2"] == chat_dto.model:
+            return
         else:
             yield from self.chat_ollama(chat_dto)
