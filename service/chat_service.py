@@ -130,7 +130,7 @@ class ChatService:
                 "https": HTTPS_PROXY
             }
         search_results = []
-        #with DDGS(proxies=proxies) as ddgs:
+        # with DDGS(proxies=proxies) as ddgs:
         with DDGS(proxies=proxies) as ddgs:
             search_res_list = ddgs.text(query, max_results=10)
             for r in search_res_list:
