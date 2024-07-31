@@ -183,7 +183,7 @@ class ChatService:
 
     def chat(self, chat_dto: ChatDTO):
         print(chat_dto.model)
-        self.logger(F"{json.dumps(chat_dto)}")
+        # self.logger(F"{json.dumps(chat_dto)}")
         if "gemma" == chat_dto.model:
             yield from self.chat_gemma(chat_dto)
         elif CHAT_MODELS["GEMMA2"] == chat_dto.model:
