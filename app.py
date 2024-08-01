@@ -63,18 +63,18 @@ async def log_middleware(request: Request, call_next):
     logger.info(f"Request path: {request.url.path}, Method: {request.method}, Body: {request_json}")
 
     response = await call_next(request)
-    # 记录响应信息
-    response_body = [chunk async for chunk in response.body_iterator]
-    response_body = b"".join(response_body)
-    try:
-        response_json = json.loads(response_body.decode())
-    except json.JSONDecodeError:
-        response_json = response_body.decode()
-    logger.info(f"Response status: {response.status_code}, Body: {response_json}")
-
-    # 重新构建响应，因为响应体已经被读取
-    new_response = Response(content=response_body, status_code=response.status_code, headers=dict(response.headers))
-    return new_response
+    # # 记录响应信息
+    # response_body = [chunk async for chunk in response.body_iterator]
+    # response_body = b"".join(response_body)
+    # try:
+    #     response_json = json.loads(response_body.decode())
+    # except json.JSONDecodeError:
+    #     response_json = response_body.decode()
+    # logger.info(f"Response status: {response.status_code}, Body: {response_json}")
+    #
+    # # 重新构建响应，因为响应体已经被读取
+    # new_response = Response(content=response_body, status_code=response.status_code, headers=dict(response.headers))
+    return response
 
 
 @app.middleware("http")
